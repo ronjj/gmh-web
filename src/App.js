@@ -10,6 +10,14 @@ function App() {
     duration: 120,
     price: 20.00,
 }
+// make a second example trip
+const exampleTrip2 = {
+  departureDate: '2022-06-01',
+  departureTime: '2021-06-01T08:00:00',
+  arrivalTime: '2021-06-01T10:00:00',
+  duration: 120,
+  price: 20.00,
+}
 
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
@@ -26,9 +34,26 @@ function App() {
   
   maxDate = maxYyyy + '-' + maxMm + '-' + maxDd;
 
+  async function fetchData() {
+    try {
+      // Make the fetch request
+      const response = await fetch(apiUrl, { mode: 'cors' });
+      console.log('response', response);
+  
+      // Parse the JSON from the response
+      const data = await response.json();
+      console.log('data', data)
+  
+      // Log the data to the console (or handle it as needed)
+      console.log(data);
+    } catch (error) {
+      // Handle errors (e.g., network errors, JSON parsing errors)
+      console.error('Fetch error:', error);
+    }
+  }
+  
   const handleButtonClick = () => {
-    console.log('button clicked');
-    console.log(apiUrl);
+    fetchData();
   };
 
   const handleSelectChange = (setter) => (event) => {
@@ -47,9 +72,11 @@ function App() {
   const [departureLocation, setDepartureLocation] = useState('new_york');
   const [arrivalLocation, setArrivalLocation] = useState('ithaca');
   const [departureDate, setDepartureDate] = useState(today);
+  const [trips, setTrips] = useState([]);
 
-  const apiUrl = `https://get-me-home.onrender.com/flix/${departureDate}/${departureLocation}/${arrivalLocation}`
-
+  // const apiUrl = `https://get-me-home.onrender.com/flix/${departureDate}/${departureLocation}/${arrivalLocation}`
+  const apiUrl = `http://127.0.0.1:5000/flix/${departureDate}/${departureLocation}/${arrivalLocation}`
+ 
   return (
     <div className="app">
       <h1>GetMeHome</h1>
@@ -74,8 +101,8 @@ function App() {
       <div className="loc_dropdown">
         <h3>Arrival Location</h3>
         <select onChange={handleSelectChange(setArrivalLocation)}>
+        <option value="ithaca">Ithaca, NY</option>
           <option value="new_york">NYC</option>
-          <option value="ithaca">Ithaca, NY</option>
           <option value="jfk">JFK Airport</option>
           <option value="binghamton">Binghamton, NY</option>
           <option value="rochester">Rochester, NY</option>
@@ -97,7 +124,7 @@ function App() {
         <button onClick={handleButtonClick}>Search</button>       
       </div>
       <div className="trip">
-        <TripGrid trips={[exampleTrip]}></TripGrid>
+        <TripGrid trips={trips}></TripGrid>
         </div>
       </div>
   );
