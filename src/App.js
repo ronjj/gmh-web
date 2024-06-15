@@ -38,14 +38,12 @@ const exampleTrip2 = {
     try {
       // Make the fetch request
       const response = await fetch(apiUrl, { mode: 'cors' });
-      console.log('response', response);
   
       // Parse the JSON from the response
       const data = await response.json();
-      console.log('data', data)
   
-      // Log the data to the console (or handle it as needed)
-      console.log(data);
+      // console.log(data.trips);
+      setTrips(data.trips);
     } catch (error) {
       // Handle errors (e.g., network errors, JSON parsing errors)
       console.error('Fetch error:', error);
