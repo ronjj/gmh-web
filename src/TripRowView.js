@@ -33,7 +33,7 @@ const TripRowView = ({ trip }) => {
             ))}
           </ul>
         </li>
-        <li><strong>Ticket Link:</strong> <a href={trip.ticket_link} target="_blank" rel="noopener noreferrer">Buy Ticket</a></li>
+        <li><a href={trip.ticket_link} target="_blank" rel="noopener noreferrer">Buy Ticket</a></li>
       </ul>
     </div>
   );

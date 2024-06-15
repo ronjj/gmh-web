@@ -37,3 +37,58 @@ code {
 .trip-row ul li strong {
   margin-right: 0.5em;
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; /* Adjust spacing between items */
+  padding: 1em; /* Padding from the edge of the window */
+  gap: 1em; /* Space between flex items */
+  border: 1px solid #ddd; /* Optional: border for visual separation */
+  border-radius: 5px; /* Optional: rounded corners */
+  background-color: #f9f9f9; /* Optional: background color */
+}
+
+.loc_dropdown, .date_dropdown, .search {
+  flex: 1; /* Make items flexible */
+}
+
+.loc_dropdown h3, .date_dropdown h3 {
+  margin: 0 0 0.5em 0; /* Adjust heading margins */
+}
+
+select, input[type="date"], button {
+  width: 100%; /* Make inputs and button full width within their container */
+  padding: 0.5em; /* Padding inside inputs and button */
+  margin: 0; /* Remove default margins */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.search .button {
+  cursor: pointer; /* Change cursor on hover */
+  padding: 0.5em 1em; /* Padding inside button */
+}
+
+.search {
+  margin: 1em 25em;
+}
+
+.search button:disabled {
+  cursor: not-allowed;
+}
+
+.loading-indicator {
+  text-align: center;
+  font-size: 1.5em;
+  color: #0000;
+  margin-top: 2em;
+}
+
+.trip {
+  margin-top: 1em;
+}
+
+.gmh {
+  text-align: center;
+}
