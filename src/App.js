@@ -1,10 +1,19 @@
 import React,{ useState } from 'react';
+import TripGrid from './TripGrid';
 import './App.css';
 
 function App() {
+  const exampleTrip = {
+    departureDate: '2021-06-01',
+    departureTime: '2021-06-01T08:00:00',
+    arrivalTime: '2021-06-01T10:00:00',
+    duration: 120,
+    price: 20.00,
+}
+
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
-  let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let mm = String(today.getMonth() + 1).padStart(2, '0');
   let yyyy = today.getFullYear();
   
   today = yyyy + '-' + mm + '-' + dd;
@@ -12,7 +21,7 @@ function App() {
   let maxDate = new Date();
   maxDate.setMonth(maxDate.getMonth() + 2);
   let maxDd = String(maxDate.getDate()).padStart(2, '0');
-  let maxMm = String(maxDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+  let maxMm = String(maxDate.getMonth() + 1).padStart(2, '0'); 
   let maxYyyy = maxDate.getFullYear();
   
   maxDate = maxYyyy + '-' + maxMm + '-' + maxDd;
@@ -46,7 +55,6 @@ function App() {
       <h1>GetMeHome</h1>
       <div className="loc_dropdown">
         <h3>Departure Location</h3>
-        {/* when I choose an option, I want to set the state of setDeparture to the option value */}
         <select onChange={handleSelectChange(setDepartureLocation)}>
           <option value="new_york">NYC</option>
           <option value="ithaca">Ithaca, NY</option>
@@ -85,10 +93,12 @@ function App() {
         <h3>Departure Date</h3>
         <input type="date" min={today} max={maxDate} onChange={handleSelectChange(setDepartureDate)} />
       </div>
-      {/* create a div called search that contains a button that says search */}
       <div className="search">
         <button onClick={handleButtonClick}>Search</button>       
       </div>
+      <div className="trip">
+        <TripGrid trips={[exampleTrip]}></TripGrid>
+        </div>
       </div>
   );
 }
