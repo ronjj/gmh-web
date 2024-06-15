@@ -20,6 +20,7 @@ code {
 
 .trip-row {
   border: 1px solid #ddd;
+  border-top: none; /* Remove the top border */
   padding: 1em;
   border-radius: 5px;
 }

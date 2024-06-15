@@ -3,22 +3,6 @@ import TripGrid from './TripGrid';
 import './App.css';
 
 function App() {
-  const exampleTrip = {
-    departureDate: '2021-06-01',
-    departureTime: '2021-06-01T08:00:00',
-    arrivalTime: '2021-06-01T10:00:00',
-    duration: 120,
-    price: 20.00,
-}
-// make a second example trip
-const exampleTrip2 = {
-  departureDate: '2022-06-01',
-  departureTime: '2021-06-01T08:00:00',
-  arrivalTime: '2021-06-01T10:00:00',
-  duration: 120,
-  price: 20.00,
-}
-
   let today = new Date();
   let dd = String(today.getDate()).padStart(2, '0');
   let mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -72,8 +56,8 @@ const exampleTrip2 = {
   const [departureDate, setDepartureDate] = useState(today);
   const [trips, setTrips] = useState([]);
 
-  // const apiUrl = `https://get-me-home.onrender.com/flix/${departureDate}/${departureLocation}/${arrivalLocation}`
-  const apiUrl = `http://127.0.0.1:5000/flix/${departureDate}/${departureLocation}/${arrivalLocation}`
+  const apiUrl = `https://get-me-home.onrender.com/flix/${departureDate}/${departureLocation}/${arrivalLocation}`
+  // const apiUrl = `http://127.0.0.1:5000/flix/${departureDate}/${departureLocation}/${arrivalLocation}`
  
   return (
     <div className="app">
