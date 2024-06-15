@@ -1,43 +1,42 @@
 import React from 'react';
 
 const TripRowView = ({ trip }) => {
-    const formatDate = (date) => {
-        const formattedDate = new Date(date).toLocaleDateString('en-US', {
-            month: '2-digit',
-            day: '2-digit',
-            year: 'numeric',
-        });
-        return formattedDate;
-    };
+  const formatDate = (dateString) => {
+    const [year, month, day] = dateString.split('-');
+    return `${month}/${day}/${year}`;
+  };
 
-    const formatTime = (time) => {
-        const formattedTime = new Date(time).toLocaleTimeString('en-US', {
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true,
-        });
-        return formattedTime;
-    };
+  const formatTime = (time) => {
+    const [hours, minutes, period] = time.split(/[: ]/);
+    return `${hours}:${minutes} ${period}`;
+  };
 
-    const formatDuration = (duration) => {
-        const hours = Math.floor(duration / 60);
-        const minutes = duration % 60;
-        return `${hours} hours ${minutes} minutes`;
-    };
+  const formatPrice = (price) => {
+    return `$${price.toFixed(2)}`;
+  };
 
-    const formatPrice = (price) => {
-        return `$${price.toFixed(2)}`;
-    };
-
-    return (
-        <tr className="trip_row">
-            <td className="trip_date">{formatDate(trip.departureDate)}</td>
-            <td className="trip_time">{formatTime(trip.departureTime)}</td>
-            <td className="trip_time">{formatTime(trip.arrivalTime)}</td>
-            <td className="trip_duration">{formatDuration(trip.duration)}</td>
-            <td className="trip_price">{formatPrice(trip.price)}</td>
-        </tr>
-    );
+  return (
+    <div className="trip-row">
+      <ul>
+        <li><strong>Date:</strong> {formatDate(trip.date)}</li>
+        <li><strong>Departure Time:</strong> {formatTime(trip.departure_time)}</li>
+        <li><strong>Arrival Time:</strong> {formatTime(trip.arrival_time)}</li>
+        <li><strong>Departure Location:</strong> {trip.departure_location}</li>
+        <li><strong>Arrival Location:</strong> {trip.arrival_location}</li>
+        <li><strong>Price:</strong> {formatPrice(trip.price)}</li>
+        <li><strong>Bus Service:</strong> {trip.bus_service}</li>
+        <li><strong>Non-stop:</strong> {trip.non_stop}</li>
+        <li><strong>Intermediate Stops:</strong>
+          <ul>
+            {trip.intermediate_stations.map((station, index) => (
+              <li key={index}>{station}</li>
+            ))}
+          </ul>
+        </li>
+        <li><strong>Ticket Link:</strong> <a href={trip.ticket_link} target="_blank" rel="noopener noreferrer">Buy Ticket</a></li>
+      </ul>
+    </div>
+  );
 };
 
 export default TripRowView;

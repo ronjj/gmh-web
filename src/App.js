@@ -42,7 +42,7 @@ const exampleTrip2 = {
       // Parse the JSON from the response
       const data = await response.json();
   
-      // console.log(data.trips);
+      console.log(data.trips);
       setTrips(data.trips);
     } catch (error) {
       // Handle errors (e.g., network errors, JSON parsing errors)

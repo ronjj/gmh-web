@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.trip-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.trip-row {
+  border: 1px solid #ddd;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.trip-row ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.trip-row ul li {
+  margin-bottom: 0.5em;
+}
+
+.trip-row ul li strong {
+  margin-right: 0.5em;
+}
