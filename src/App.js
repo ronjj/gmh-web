@@ -126,6 +126,14 @@ function App() {
     console.log(departureDate);
   }, []);
 
+  const getKey = (value) => {
+    for (const op in options) {
+      if (options[op] === value) {
+        return op
+      }
+    }
+  }
+
   return (
     <div className="app">
       <h1 className='gmh'>GetMeHome</h1>
@@ -162,7 +170,7 @@ function App() {
         <div className="loading-indicator">Loading...</div>
       ) : dataFetched && trips.length === 0 ? (
         <div style={{textAlign: "center", fontWeight: "bold", marginTop: "2%"}}>
-          There is no data
+          There are no trips from {getKey(departureLocation)} to {getKey(arrivalLocation)} on the date {departureDate}.
         </div>
       ) : (
         <div className="trip">
