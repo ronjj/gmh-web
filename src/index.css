@@ -71,10 +71,19 @@ select, input[type="date"], button {
 }
 
 .search {
-  margin: 1em 25em;
+  margin: 1em auto;
+  width: 10%
 }
 
 .search button:disabled {
+  cursor: not-allowed;
+}
+
+.loc_dropdown select:disabled {
+  cursor: not-allowed;
+}
+
+.date_dropdown input:disabled {
   cursor: not-allowed;
 }
 
