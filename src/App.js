@@ -57,11 +57,46 @@ function App() {
     }
   }
 
+  // Function for determining whether the departureDate field is before/prior to the current (today's) date
+  const isPastDate = () => {
+    const threshold = new Date();
+    threshold.setDate(threshold.getDate() - 1); // Date before the current date
+    const tripDate = new Date(departureDate);
+    if (tripDate < threshold) {
+      return true
+    }
+    return false
+  }
+
+  // Function for determining whether the date is an existent date. Example: Returns false for the date Feb. 30th, 2020 because February has at most 29 days.
+  function isExistentDate(dateString) {
+    const parts = dateString.split("-");
+
+    const year = parseInt(parts[2], 10);
+    const month = parseInt(parts[0], 10);
+    const day = parseInt(parts[1], 10);
+
+    if (isNaN(year) || isNaN(month) || isNaN(day)) {
+      return false
+    } 
+    return true
+  } 
+
   const handleButtonClick = () => {
     if (departureLocation === arrivalLocation) {
       alert('Departure and arrival locations must be different.');
       return;
     }
+    if (!isExistentDate(departureDate)) {
+      alert("Date must be an existent date on the calendar.");
+      return;
+    }
+    if (isPastDate()) {
+      console.log("Here2");
+      alert("Date must be on or after today's date.");
+      return;
+    } 
+
     setLoading(false);
     fetchData();
   };
@@ -92,7 +127,7 @@ function App() {
       <div className="row">
         <div className="loc_dropdown">
           <h3>Departure</h3>
-          <select value={departureLocation} onChange={handleSelectChange(setDepartureLocation)}>
+          <select value={departureLocation} onChange={handleSelectChange(setDepartureLocation)} disabled={loading}>
             <option value="" disabled>Select a location</option>
             {filterOptions(arrivalLocation).map(option => (
               <option key={option} value={options[option]}>{option}</option>
@@ -101,7 +136,7 @@ function App() {
         </div>
         <div className="loc_dropdown">
           <h3>Arrival</h3>
-          <select value={arrivalLocation} onChange={handleSelectChange(setArrivalLocation)}>
+          <select value={arrivalLocation} onChange={handleSelectChange(setArrivalLocation)} disabled={loading}>
             <option value="" disabled>Select a location</option>
             {filterOptions(departureLocation).map(option => (
               <option key={option} value={options[option]}>{option}</option>
@@ -110,12 +145,12 @@ function App() {
         </div>
         <div className="date_dropdown">
           <h3>Date</h3>
-          <input type="date" min={today} max={maxDate} onChange={handleSelectChange(setDepartureDate)} />
+          <input type="date" min={today} max={maxDate} onChange={handleSelectChange(setDepartureDate)} disabled={loading}/>
         </div>
       </div>
 
       <div className="search">
-        <button onClick={handleButtonClick} disabled={!departureDate}>Search</button>
+        <button onClick={handleButtonClick} disabled={loading}>Search</button>
       </div>
 
       {loading ? (
