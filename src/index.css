@@ -1,3 +1,7 @@
+html {
+  background-color: black;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -45,9 +49,9 @@ code {
   justify-content: space-between; /* Adjust spacing between items */
   padding: 1em; /* Padding from the edge of the window */
   gap: 1em; /* Space between flex items */
-  border: 1px solid #ddd; /* Optional: border for visual separation */
+  border: 1px solid #000000; /* Optional: border for visual separation */
   border-radius: 5px; /* Optional: rounded corners */
-  background-color: #f9f9f9; /* Optional: background color */
+  background-color: #000000; /* Optional: background color */
 }
 
 .loc_dropdown, .date_dropdown, .search {
@@ -72,7 +76,7 @@ select, input[type="date"], button {
 
 .search {
   margin: 1em auto;
-  width: 10%
+  max-width: 22%;
 }
 
 .search button:disabled {
@@ -100,4 +104,23 @@ select, input[type="date"], button {
 
 .gmh {
   text-align: center;
+}
+
+.primary_field {
+  color: rgb(212, 9, 209);
+  background-color: rgb(83, 18, 84);
+  border-width: 0;
+  border-radius: 5px;
+}
+
+.primary_field:active{
+  background-color: rgb(137, 1, 137);
+}
+
+.secondary_field {
+  color: white;
+  background-color: rgb(213, 13, 213);
+  border-width: 0;
+  border-radius: 5px;
+  margin: 0 0 0.5em 0
 }
