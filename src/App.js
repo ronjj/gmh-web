@@ -39,6 +39,7 @@ function App() {
   const [departureDate, setDepartureDate] = useState('');
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [dataFetched, setDataFetched] = useState(false);
 
   const apiUrl = `https://get-me-home.onrender.com/flix/${departureDate}/${departureLocation}/${arrivalLocation}`;
 
@@ -54,6 +55,7 @@ function App() {
       console.error('Fetch Error:', error);
     } finally {
       setLoading(false);
+      setDataFetched(true);
     }
   }
 
@@ -158,6 +160,10 @@ function App() {
 
       {loading ? (
         <div className="loading-indicator">Loading...</div>
+      ) : dataFetched && trips.length === 0 ? (
+        <div style={{textAlign: "center", fontWeight: "bold", marginTop: "2%"}}>
+          There is no data
+        </div>
       ) : (
         <div className="trip">
           <TripGrid trips={trips} />
