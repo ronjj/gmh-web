@@ -51,7 +51,7 @@ function App() {
       console.log(data.trips);
       setTrips(data.trips);
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error('Fetch Error:', error);
     } finally {
       setLoading(false);
     }
@@ -84,16 +84,19 @@ function App() {
 
   const handleButtonClick = () => {
     if (departureLocation === arrivalLocation) {
-      alert('Departure and arrival locations must be different.');
+      alert('Input Error: Departure and arrival locations must be different.');
+      return;
+    }
+    if (departureDate.localeCompare('') === 0) {
+      alert("Input Error: Date not entered.");
       return;
     }
     if (!isExistentDate(departureDate)) {
-      alert("Date must be an existent date on the calendar.");
+      alert("Input Error: Date must be an existent date on the calendar.");
       return;
     }
     if (isPastDate()) {
-      console.log("Here2");
-      alert("Date must be on or after today's date.");
+      alert("Input Error: Date must be on or after today's date.");
       return;
     } 
 
