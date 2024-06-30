@@ -40,6 +40,10 @@ function App() {
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
+  const [departureTime, setDepartureTime] = useState(true); // State for departure time button
+  const [arrivalTime, setArrivalTime] = useState(true); // State for departure time button
+  const [maxPrice, setMaxPrice] = useState(true);
+  const [rangeValue, setRangeValue] = useState(1);
 
   const apiUrl = `https://get-me-home.onrender.com/flix/${departureDate}/${departureLocation}/${arrivalLocation}`;
 
@@ -140,6 +144,10 @@ function App() {
     setDepartureLocation(temp);
   }
 
+  const changeValue = (event) => {
+    setRangeValue(event.target.value);
+  }
+
   return (
     <div className="app">
       <h1 className='gmh'>GetMeHome</h1>
@@ -171,16 +179,62 @@ function App() {
         </div>
       </div>
 
+      <div>
+        <button style={{width: "fit-content"}} onClick={() => setDepartureTime(!departureTime)}>Departure Time</button>
+      </div>
+
+      {
+        departureTime && (
+          <div>
+            Earliest Departure Time:
+            <input type="time" step="3600"></input>
+          </div>
+        )
+      }
+
+      <div>
+        <button style={{width: "fit-content"}} onClick={() => setArrivalTime(!arrivalTime)}>Arrival Time</button>
+      </div>
+
+      {
+        arrivalTime && (
+          <div>
+            Latest Arrival Time:
+            <input type="time" step="3600"></input>
+          </div>
+        )
+      }
+      <div style={{display:"inline-flex", alignItems: "center"}}>
+        <button style={{width: "fit-content"}} onClick={() => setMaxPrice(!maxPrice)}>Max Price</button>
+        {
+        maxPrice && (
+          <div style={{}}>
+            <input type="range" min="1" max="400" step="1" onChange={changeValue} value={rangeValue}></input>
+            ${rangeValue}.00
+          </div>
+        )
+      }
+      </div>
+
+      
+
       <div className="search">
         <button onClick={handleButtonClick} disabled={loading}>Search</button>
       </div>
 
       {loading ? (
         <div className="loading-indicator">Loading...</div>
-      ) : dataFetched && trips.length === 0 ? (
-        <div style={{textAlign: "center", fontWeight: "bold", marginTop: "2%"}}>
+      ) : trips.length === 0 ? (
+        dataFetched ? (
+          <div style={{textAlign: "center", fontWeight: "bold", marginTop: "2%"}}>
           There are no trips from {getKey(departureLocation)} to {getKey(arrivalLocation)} on the date {departureDate}.
         </div>
+        ) : (
+          <div style={{textAlign: "center", marginTop: "2%"}}>
+            <h3>Search For Trips</h3>
+            <p>Select a Date, Departure Location, and Destination</p>
+          </div>
+        )
       ) : (
         <div className="trip">
           <TripGrid trips={trips} />
