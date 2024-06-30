@@ -134,6 +134,12 @@ function App() {
     }
   }
 
+  const switchLocations = () => {
+    const temp = arrivalLocation;
+    setArrivalLocation(departureLocation);
+    setDepartureLocation(temp);
+  }
+
   return (
     <div className="app">
       <h1 className='gmh'>GetMeHome</h1>
@@ -159,6 +165,9 @@ function App() {
         <div className="date_dropdown">
           <h3>Date</h3>
           <input type="date" min={today} max={maxDate} onChange={handleSelectChange(setDepartureDate)} disabled={loading}/>
+        </div>
+        <div>
+          <button onClick={switchLocations} disabled={loading}>Switch</button>
         </div>
       </div>
 
